@@ -8,6 +8,8 @@ const Header = () => {
       padding="35px 100px"
       display="flex"
       alignItems="center"
+      maxWidth="1440px"
+      marginLeft="calc(50% - 720px)"
     >
       <Image
         flexGrow={0}
@@ -23,6 +25,7 @@ const Header = () => {
         marginLeft="15px"
         color="neutral.gray_violet"
         fontWeight="bold"
+        fontSize="0.8em"
         >
         <Box
           display="flex"
