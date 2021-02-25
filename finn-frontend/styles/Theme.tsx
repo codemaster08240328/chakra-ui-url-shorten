@@ -16,6 +16,10 @@ const theme = extendTheme({
       gray_violet: 'hsl(257, 7%, 63%)',
       dark_blue: 'hsl(255, 11%, 22%)',
       dark_violet: 'hsl(260, 8%, 14%)',
+    },
+    hover: {
+      cyan: 'hsl(180, 66%, 80%)',
+      dark_violet: 'hsl(257, 27%, 76%)'
     }
   },
   breakpoints: createBreakpoints({

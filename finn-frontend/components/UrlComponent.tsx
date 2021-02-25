@@ -35,6 +35,9 @@ const UrlComponent: React.FC<TUrlComponentProps> = ({origin, shorten, copied}) =
           variant="cyan"
           fontSize="0.8em"
           width="100px"
+          _hover={{
+            bg: 'hover.cyan'
+          }}
         >
           Copy
         </Button>
@@ -44,6 +47,11 @@ const UrlComponent: React.FC<TUrlComponentProps> = ({origin, shorten, copied}) =
           fontSize="0.8em"
           bg="primary.dark_violet"
           width="100px"
+          _hover={{
+            bg: 'hover.dark_violet',
+            cursor: 'not-allowed'
+          }}
+          disabled
         >
           Copied!
         </Button>

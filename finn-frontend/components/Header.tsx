@@ -1,5 +1,22 @@
 import React from 'react';
-import { Box, Button, Image } from '@chakra-ui/react';
+import { Box, Button, Image, Text } from '@chakra-ui/react';
+import Link from 'next/link';
+
+type TMenu = {
+  title: string;
+  link: string;
+}
+
+const headerMenu: Array<TMenu> = [{
+  title: 'Features',
+  link: '#'
+},{
+  title: 'Pricing',
+  link: '#'
+},{
+  title: 'Resources',
+  link: '#'
+}];
 
 const Header = () => {
   return (
@@ -10,11 +27,13 @@ const Header = () => {
       maxWidth="1440px"
       marginLeft="calc(50% - 720px)"
     >
-      <Image
-        flexGrow={0}
-        src='/assets/logo.svg'
-        height="fit-content"
-      />
+      <Link href="/">
+        <Image
+          flexGrow={0}
+          src='/assets/logo.svg'
+          height="fit-content"
+        />
+      </Link>
 
       <Box
         flexGrow={1}
@@ -26,49 +45,42 @@ const Header = () => {
         fontWeight="bold"
         fontSize="0.8em"
         >
-        <Box
-          display="flex"
-          >
-          <Box 
-            padding="0 15px"
-            _hover={{
-              cursor: 'pointer',
-              color: 'neutral.dark_violet',
-            }}
-          >Features</Box>
-          <Box
-            padding="0 15px"
-            _hover={{
-              cursor: 'pointer',
-              color: 'neutral.dark_violet',
-            }}
-          >Pricing</Box>
-          <Box 
-            padding="0 15px" 
-            _hover={{
-              cursor: 'pointer',
-              color: 'neutral.dark_violet',
-            }}
-          >Resources</Box>
-        </Box>
-        <Box
-          display="flex"
-          alignItems="center"
+        {
+          headerMenu.map((menu, index) => 
+            <Text
+              key={index.toString()}
+              as="a"
+              href={menu.link}
+              padding="0 15px"
+              display="block"
+              _hover={{
+                cursor: 'pointer',
+                color: 'neutral.dark_violet',
+              }}
+            >{menu.title}</Text>
+          )
+        }
+        <Box flexGrow={1} />
+        <Box 
+          padding="0 15px"
+          _hover={{
+            cursor: 'pointer'
+          }}  
+        >Login</Box>
+        <Button 
+          padding="5px 15px"
+          variant="rounded-cyan"
+          borderRadius="20px"
+          fontWeight="bold"
+          marginLeft="10px"
+          fontSize="1em"
+          _hover={{
+            bg: 'hover.cyan'
+          }}
         >
-          <Box padding="0 15px">Login</Box>
-          <Button 
-            padding="5px 15px"
-            variant="rounded-cyan"
-            borderRadius="20px"
-            fontWeight="bold"
-            marginLeft="10px"
-            fontSize="1em"
-          >
-            Sign Up
-          </Button>
-        </Box>
+          Sign Up
+        </Button>
       </Box>
-
     </Box>
   )
 }

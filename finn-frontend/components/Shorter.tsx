@@ -25,6 +25,9 @@ const Shorter = () => {
         variant="cyan"
         color="white"
         ml="15px"
+        _hover={{
+          bg: 'hover.cyan'
+        }}
       >
         Shorten It!
       </Button>

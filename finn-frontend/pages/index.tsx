@@ -3,6 +3,7 @@ import { Box, Button, Image } from '@chakra-ui/react'
 import Shorter from '../components/Shorter';
 import UrlComonent, { TUrlComponentProps } from '../components/UrlComponent';
 import CardComponent, { TCardComponentProps } from '../components/Card';
+import BoostComponent from '../components/Boost';
 
 const urls: Array<TUrlComponentProps> = [
   {
@@ -77,6 +78,9 @@ const Home: React.FC = () => {
             width="fit-content"
             fontSize="1.2em"
             marginTop="40px"
+            _hover={{
+              bg: 'hover.cyan'
+            }}
           >
             Get Started
           </Button>
@@ -95,11 +99,13 @@ const Home: React.FC = () => {
         position="relative"
         py="50px"
         px="calc(50% - 620px)"
+        pb="100px"
       >
         <Shorter />
         {
-          urls.map(url => (
-            <UrlComonent 
+          urls.map((url, index) => (
+            <UrlComonent
+              key={index.toString()}
               origin={url.origin}
               shorten={url.shorten}
               copied={url.copied}
@@ -132,6 +138,7 @@ const Home: React.FC = () => {
           {
             cards.map(({icon, title, description}: TCardComponentProps, index: number) => (
               <CardComponent
+                key={index.toString()}
                 mt={50 * index}
                 icon={icon}
                 title={title}
@@ -149,7 +156,7 @@ const Home: React.FC = () => {
           ></Box>
         </Box>
       </Box>
-      
+      <BoostComponent />
     </Box>
   )
 }
