@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box, Image } from '@chakra-ui/react';
-import LogoImg from '../styles/assets/logo.svg';
+import { Box, Button, Image } from '@chakra-ui/react';
 
 const Header = () => {
   return (
@@ -13,7 +12,7 @@ const Header = () => {
     >
       <Image
         flexGrow={0}
-        src={LogoImg}
+        src='/assets/logo.svg'
         height="fit-content"
       />
 
@@ -57,17 +56,16 @@ const Header = () => {
           alignItems="center"
         >
           <Box padding="0 15px">Login</Box>
-          <Box 
+          <Button 
             padding="5px 15px"
-            as="button"
-            bg="primary.cyan"
-            color="white"
+            variant="rounded-cyan"
             borderRadius="20px"
             fontWeight="bold"
             marginLeft="10px"
+            fontSize="1em"
           >
             Sign Up
-          </Box>
+          </Button>
         </Box>
       </Box>
 

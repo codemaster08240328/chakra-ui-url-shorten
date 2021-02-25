@@ -11,6 +11,7 @@ const theme = extendTheme({
       red: 'hsl(0, 87%, 67%)'
     },
     neutral: {
+      gray_light: 'rgb(240, 241, 246)',
       gray: 'hsl(0, 0%, 75%)',
       gray_violet: 'hsl(257, 7%, 63%)',
       dark_blue: 'hsl(255, 11%, 22%)',
@@ -32,6 +33,27 @@ const theme = extendTheme({
   fontWeights: {
     medium: 500,
     bold: 700
+  },
+  components: {
+    Button:{
+      baseStyle: {
+        whiteSpace: 'nowrap',
+        color: 'white',
+      },
+      variants: {
+        cyan: {
+          bg: 'primary.cyan',
+          borderRadius: '5px',
+        },
+        "rounded-cyan": {
+          bg: 'primary.cyan',
+          borderRadius: '26px',
+        },
+        small: {
+          padding: '10px 15px'
+        }
+      }
+    }
   }
 })
 

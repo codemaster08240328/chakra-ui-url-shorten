@@ -10,8 +10,8 @@ const MyApp: React.FC<{Component: React.FC, pageProps: any}> = ({ Component, pag
   return (
     <ChakraProvider theme={theme}>
       <Fonts />
-        <Header />
-        <Component {...pageProps} />
+      <Header />
+      <Component {...pageProps} />
     </ChakraProvider>
   )
 }
