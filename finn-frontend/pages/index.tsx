@@ -1,27 +1,9 @@
-import React from 'react';
-import { Box, Button, Image } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react';
+import { Box, Button, Image, Text, useToast } from '@chakra-ui/react'
 import Shorter from '../components/Shorter';
 import UrlComonent, { TUrlComponentProps } from '../components/UrlComponent';
 import CardComponent, { TCardComponentProps } from '../components/Card';
 import BoostComponent from '../components/Boost';
-
-const urls: Array<TUrlComponentProps> = [
-  {
-    origin: 'https://frontendmentor.io',
-    shorten: 'https://rel.ink/kkk',
-    copied: false
-  },
-  {
-    origin: 'https://www.linkedin.io/company/frontend-mentor',
-    shorten: 'https://rel.ink/kkk',
-    copied: true
-  },
-  {
-    origin: 'https://twitter.com/frontendmentor',
-    shorten: 'https://rel.ink/kkk',
-    copied: false
-  }
-]
 
 const cards: Array<TCardComponentProps> = [
   {
@@ -37,9 +19,70 @@ const cards: Array<TCardComponentProps> = [
     title: 'Fully Customizable',
     description: "Improve brand awareness and content discoverability through customizable links supercharging audience engagement."
   }
-]
+];
+
 
 const Home: React.FC = () => {
+  const [urls, seturls] = useState<Array<TUrlComponentProps>>([])
+  const [loading, setloading] = useState<boolean>(false);
+  const toast = useToast();
+
+  useEffect(() => {
+    fetch('/api/shorten_links', {
+      method: 'GET'
+    })
+      .then(res => res.json())
+      .then(res => {
+        seturls(res);
+      })
+  }, []);
+
+  const shortenUrl = (link: string) => {
+    setloading(true)
+    fetch('/api/shorten_links', {
+      method: 'POST',
+      body: JSON.stringify({
+        url: link
+      })
+    })
+    .then(res => res.json())
+    .then(res => {
+      if (!res.error) {
+        console.log(res)
+        console.log(urls)
+        seturls([...urls, res]);
+      } else {
+        toast({
+          title: 'Url Invalid',
+          description: res.error,
+          status: 'error',
+          duration: 5000,
+          isClosable: true
+        });
+      }
+      setloading(false);
+    })
+  }
+
+  const onCopy = (shorten: string) => {
+    const newUrls = urls.map(url => {
+      if (url.shorten === shorten) {
+        return {
+          shorten,
+          origin: url.origin,
+          copied: true,
+        }
+      } 
+      return {
+        shorten: url.shorten,
+        origin: url.origin,
+        copied: false,
+      }
+    });
+
+    seturls(newUrls);
+  }
+
   return (
     <Box>
       <Box
@@ -56,7 +99,7 @@ const Home: React.FC = () => {
           flexDirection="column"
           justifyContent="center"
         >
-          <Box
+          <Text
             fontSize="6xl"
             fontWeight="bold"
             lineHeight="69px"
@@ -64,14 +107,14 @@ const Home: React.FC = () => {
             color="neutral.dark_violet"
           >
             More than just<br />shorter links
-          </Box>
-          <Box
+          </Text>
+          <Text
             fontSize="1.2em"
             color="neutral.gray_violet"
             marginTop="4px"
           >
             Build your brand's recognition get detailed <br/>insights on how your links are performing.
-          </Box>
+          </Text>
           <Button
             padding="26px 38px"
             variant="rounded-cyan"
@@ -101,7 +144,7 @@ const Home: React.FC = () => {
         px="calc(50% - 620px)"
         pb="100px"
       >
-        <Shorter />
+        <Shorter shortenUrl={shortenUrl} loading={loading} />
         {
           urls.map((url, index) => (
             <UrlComonent
@@ -109,11 +152,12 @@ const Home: React.FC = () => {
               origin={url.origin}
               shorten={url.shorten}
               copied={url.copied}
+              setCopiedUrl={onCopy}
             />
           ))
         }
         <Box>
-          <Box
+          <Text
             color="neutral.dark_violet"
             fontWeight="bold"
             fontSize="4xl"
@@ -121,14 +165,14 @@ const Home: React.FC = () => {
             mt="75px"
           >
             Advance Statistics
-          </Box>
-          <Box
+          </Text>
+          <Text
             textAlign="center"
             color="neutral.gray"
             mt='10px'
           >
             Track how your links are performing across the web <br /> with our advanced statistics dashboard
-          </Box>
+          </Text>
         </Box>
         <Box
           display="flex"

@@ -1,5 +1,6 @@
+import React, { useState } from 'react';
 import { Box, Button } from '@chakra-ui/react';
-import React from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 export type TUrlComponentProps = {
   origin: string;
@@ -7,7 +8,18 @@ export type TUrlComponentProps = {
   copied: boolean;
 }
 
-const UrlComponent: React.FC<TUrlComponentProps> = ({origin, shorten, copied}) => {
+const UrlComponent: React.FC<TUrlComponentProps & {setCopiedUrl: (shorten: string) => void;}> = ({origin, shorten, copied: propsCopied, setCopiedUrl}) => {
+  const [copied, setcopied] = useState<boolean>(propsCopied);
+
+  const onCopy = () => {
+    setcopied(true);
+    setCopiedUrl(shorten);
+  }
+
+  const isCopied = () => {
+    return copied && propsCopied;
+  }
+
   return (
     <Box
       bg="white"
@@ -30,32 +42,24 @@ const UrlComponent: React.FC<TUrlComponentProps> = ({origin, shorten, copied}) =
           color="primary.cyan"
         >{shorten}</Box>
       </Box>
-      {!copied &&
+      <CopyToClipboard
+        text={shorten}
+        onCopy={onCopy}
+      >
         <Button
-          variant="cyan"
+          bg={isCopied() ? 'primary.dark_violet' : 'primary.cyan'}
           fontSize="0.8em"
           width="100px"
           _hover={{
-            bg: 'hover.cyan'
+            bg: isCopied() ? 'hover.dark_violet' : 'hover.cyan',
+            cursor: isCopied() ? 'not-allowed' : 'allowed'
           }}
+          disabled={isCopied()}
         >
-          Copy
+          { !isCopied() && 'Copy'}
+          { isCopied() && 'Copied'}
         </Button>
-      }
-      {copied &&
-        <Button
-          fontSize="0.8em"
-          bg="primary.dark_violet"
-          width="100px"
-          _hover={{
-            bg: 'hover.dark_violet',
-            cursor: 'not-allowed'
-          }}
-          disabled
-        >
-          Copied!
-        </Button>
-      }
+      </CopyToClipboard>
     </Box>
   )
 }
