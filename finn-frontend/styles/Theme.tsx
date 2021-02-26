@@ -3,12 +3,12 @@ import { createBreakpoints } from '@chakra-ui/theme-tools';
 
 const theme = extendTheme({
   colors: {
-    primary:{
+    primary: {
       cyan: 'hsl(180, 66%, 49%)',
       dark_violet: 'hsl(257, 27%, 26%)',
     },
     secondary: {
-      red: 'hsl(0, 87%, 67%)'
+      red: 'hsl(0, 87%, 67%)',
     },
     neutral: {
       gray_light: 'rgb(240, 241, 246)',
@@ -19,27 +19,27 @@ const theme = extendTheme({
     },
     hover: {
       cyan: 'hsl(180, 66%, 80%)',
-      dark_violet: 'hsl(257, 27%, 76%)'
-    }
+      dark_violet: 'hsl(257, 27%, 76%)',
+    },
   },
   breakpoints: createBreakpoints({
     sm: '375px',
     md: '48em',
     lg: '62em',
-    xl: '80em'
+    xl: '80em',
   }),
   fontSizes: {
-    xl: "18px"
+    xl: '18px',
   },
   fonts: {
-    body: "Poppins"
+    body: 'Poppins',
   },
   fontWeights: {
     medium: 500,
-    bold: 700
+    bold: 700,
   },
   components: {
-    Button:{
+    Button: {
       baseStyle: {
         whiteSpace: 'nowrap',
         color: 'white',
@@ -49,16 +49,16 @@ const theme = extendTheme({
           bg: 'primary.cyan',
           borderRadius: '5px',
         },
-        "rounded-cyan": {
+        'rounded-cyan': {
           bg: 'primary.cyan',
           borderRadius: '26px',
         },
         small: {
-          padding: '10px 15px'
-        }
-      }
-    }
-  }
-})
+          padding: '10px 15px',
+        },
+      },
+    },
+  },
+});
 
-export default theme
+export default theme;

@@ -2,66 +2,74 @@ import React, { useState } from 'react';
 import { Box, Button } from '@chakra-ui/react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-export type TUrlComponentProps = {
+export interface TUrlComponentProps {
   origin: string;
   shorten: string;
   copied: boolean;
 }
 
-const UrlComponent: React.FC<TUrlComponentProps & {setCopiedUrl: (shorten: string) => void;}> = ({origin, shorten, copied: propsCopied, setCopiedUrl}) => {
+type TPropsFunc = {
+  // eslint-disable-next-line no-unused-vars
+  setCopiedUrl(shorten: string): void;
+};
+
+const UrlComponent: React.FC<TUrlComponentProps & TPropsFunc> = ({
+  origin,
+  shorten,
+  copied: propsCopied,
+  setCopiedUrl,
+}) => {
   const [copied, setcopied] = useState<boolean>(propsCopied);
 
   const onCopy = () => {
     setcopied(true);
     setCopiedUrl(shorten);
-  }
+  };
 
-  const isCopied = () => {
-    return copied && propsCopied;
-  }
+  const isCopied = () => copied && propsCopied;
 
   return (
     <Box
       bg="white"
-      borderRadius="5px"
-      display="flex"
-      mt="15px"
-      alignItems="center"
       p="7px"
+      mt="15px"
+      mx={['20px', '20px', '0']}
+      display="flex"
+      borderRadius="5px"
+      alignItems={['flex-start', 'flex-start', 'center']}
+      flexDir={['column', 'column', 'row']}
     >
       <Box
-        display="flex"
-        justifyContent="space-between"
-        flexGrow={1}
-        mr="7px"
+        color="neutral.dark_violet"
+        py={['10px', '10px', '0']}
+        borderStyle={['solid', 'solid', 'none']}
+        borderWidth="0 0 2px 0"
+        borderColor="neutral.gray"
+        w={['100%', '100%', 'fit-content']}
       >
-        <Box
-          color="neutral.dark_violet"
-        >{origin}</Box>
-        <Box
-          color="primary.cyan"
-        >{shorten}</Box>
+        {origin}
       </Box>
-      <CopyToClipboard
-        text={shorten}
-        onCopy={onCopy}
-      >
+      <Box flexGrow={1} />
+      <Box mr="7px" color="primary.cyan" py={['10px', '10px', '0']}>
+        {shorten}
+      </Box>
+      <CopyToClipboard text={shorten} onCopy={onCopy}>
         <Button
           bg={isCopied() ? 'primary.dark_violet' : 'primary.cyan'}
           fontSize="0.8em"
-          width="100px"
+          width={['100%', '100%', '100px']}
           _hover={{
             bg: isCopied() ? 'hover.dark_violet' : 'hover.cyan',
-            cursor: isCopied() ? 'not-allowed' : 'allowed'
+            cursor: isCopied() ? 'not-allowed' : 'allowed',
           }}
           disabled={isCopied()}
         >
-          { !isCopied() && 'Copy'}
-          { isCopied() && 'Copied'}
+          {!isCopied() && 'Copy'}
+          {isCopied() && 'Copied'}
         </Button>
       </CopyToClipboard>
     </Box>
-  )
-}
+  );
+};
 
 export default UrlComponent;

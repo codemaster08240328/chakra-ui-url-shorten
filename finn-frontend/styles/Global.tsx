@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Global } from '@emotion/react';
 
-const Fonts = () => (
-  <Global 
+const Fonts: React.FC = () => (
+  <Global
     styles={`
       /* devanagari */
       @font-face {
@@ -61,8 +61,6 @@ const Fonts = () => (
       }
     `}
   />
-)
+);
 
-export {
-  Fonts
-}
+export default Fonts;

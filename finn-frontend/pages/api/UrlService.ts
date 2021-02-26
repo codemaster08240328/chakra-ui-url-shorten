@@ -1,17 +1,18 @@
 import { TUrlComponentProps } from '../../components/UrlComponent';
 
 class UrlService {
-  urls: Array<TUrlComponentProps>
+  urls: Array<TUrlComponentProps>;
+
   constructor() {
     this.urls = [];
   }
 
-  get shortenUrls() {
+  get shortenUrls(): Array<TUrlComponentProps> {
     return this.urls;
   }
 
-  addShortenUrl(url: TUrlComponentProps) {
-    this.urls.push(url)
+  addShortenUrl(url: TUrlComponentProps): void {
+    this.urls.push(url);
   }
 }
 
