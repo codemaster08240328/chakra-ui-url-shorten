@@ -30,6 +30,7 @@ const UrlComponent: React.FC<TUrlComponentProps & TPropsFunc> = ({
 
   return (
     <Box
+      data-cy="shortened-url"
       bg="white"
       p="7px"
       mt="15px"

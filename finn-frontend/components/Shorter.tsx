@@ -48,6 +48,7 @@ const Shorter: React.FC<TShorterProps> = ({ shortenUrl, loading }) => {
         }}
       >
         <Input
+          data-cy="url-input"
           isInvalid={isInvalid()}
           bg="white"
           value={link}
@@ -63,6 +64,7 @@ const Shorter: React.FC<TShorterProps> = ({ shortenUrl, loading }) => {
         />
         {isInvalid() && (
           <Text
+            data-cy="error-text"
             as="span"
             color="secondary.red"
             position="absolute"
@@ -75,6 +77,7 @@ const Shorter: React.FC<TShorterProps> = ({ shortenUrl, loading }) => {
         )}
       </Box>
       <Button
+        data-cy="shorten-button"
         isLoading={loading}
         width={['100%', '100%', 'fit-content']}
         padding="9px 25px"
